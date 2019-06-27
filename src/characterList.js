@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import characters from './data';
 import CharacterInfo from './characterInfo';
 
+const style = {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    width: '500px'
+}
+
 class CharactersList extends Component {
     state = {
         people: []
@@ -13,7 +19,7 @@ class CharactersList extends Component {
         e.preventDefault();
 
         this.setState({
-            people: characters
+            people: char
         })
     }
 
@@ -21,12 +27,15 @@ class CharactersList extends Component {
         const { people } = this.state;
         return (
             <div>
-                {Object.keys(characters).map((char, ind) =>
-                    <button key={char + ind} onClick={(e) => this.handleClick(e, char)}>
-                        <b>{char}</b>
-                    </button>
-                )}
-                <CharacterInfo people={people}/>
+                    <CharacterInfo people={people}/>
+                <div>
+                    {characters.map((char, ind) => {
+                        return (
+                            <div style={style} key={char + ind} onClick={(e) => this.handleClick(e, char)}>{char.name}</div>
+                        )
+                    })}
+                </div>
+                {/* <CharacterInfo people={people}/> */}
             </div>
         )
     }
